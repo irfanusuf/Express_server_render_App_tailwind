@@ -27,7 +27,7 @@ app.get("/user", user = (req, res) => {
 });
 
 
-app.delete("/user", user = (req, res) => {
+app.delete("/deleteUser", user = (req, res) => {
   res.send("when there are no users what will u deleted");
 });
 
