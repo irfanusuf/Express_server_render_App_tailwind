@@ -1,5 +1,8 @@
+const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt")
+require("dotenv").config();
+const secretKey = process.env.SECRET_KEY
 
 
 const registerController = async (req, res) => {
@@ -12,7 +15,7 @@ const registerController = async (req, res) => {
     const newUser = await new User({ username, email, password : encryptPass  });
     const updateUser = await newUser.save();
     if (updateUser) {
-      res.render('home')
+      res.redirect('/login');  
     }
   } else {
     
@@ -20,8 +23,31 @@ const registerController = async (req, res) => {
   }
 };
 
-const loginController = (req, res) => {
-  console.log("hi heelo ");
+const loginController = async (req, res) => {
+
+ const {email ,password} = req.body
+
+ let user = await User.findOne({email})
+  if(user) {
+      const verifyPass = await bcrypt.compare(password , user.password)
+      if(verifyPass){
+        const token = jwt.sign({userId : user._id }, secretKey)
+        res.cookie('token', token, { 
+          httpOnly: true,
+          maxAge: 24*60*60*1000,
+          // secure: true,
+      });
+        res.redirect('/home')
+      }
+      else{
+        res.render('login' , {message :  "PassWord Incorrect!"})
+      }
+  }
+  else{
+    res.render('login' , {message :  "User not Found!"})
+  }
+
+
 };
 
 module.exports = { registerController, loginController };
