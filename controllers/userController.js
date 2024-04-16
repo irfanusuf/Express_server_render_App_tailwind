@@ -1,15 +1,23 @@
-const path = require("path");
+const User = require("../models/userModel");
+const bcrypt = require("bcrypt")
 
-const registerController = (req, res) => {
+
+const registerController = async (req, res) => {
   const { username, email, password } = req.body;
 
-  if (username && email && password !== "") {
-    res.sendFile(path.resolve("views/login.html"));
+  const user = await User.findOne({ email });
+  const encryptPass =  await bcrypt.hash(password , 10)
+
+  if (!user) {
+    const newUser = await new User({ username, email, password : encryptPass  });
+    const updateUser = await newUser.save();
+    if (updateUser) {
+      res.render('home')
+    }
   } else {
-    res.json({ message: "All credentials Required " });
+    
+    res.render('register', { message: 'User already exists' });
   }
-
-
 };
 
 const loginController = (req, res) => {
