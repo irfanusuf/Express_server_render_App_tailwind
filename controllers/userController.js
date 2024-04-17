@@ -26,17 +26,21 @@ const registerController = async (req, res) => {
 const loginController = async (req, res) => {
 
  const {email ,password} = req.body
-
  let user = await User.findOne({email})
+
+
   if(user) {
       const verifyPass = await bcrypt.compare(password , user.password)
       if(verifyPass){
         const token = jwt.sign({userId : user._id }, secretKey)
+
+      
         res.cookie('token', token, { 
           httpOnly: true,
-          maxAge: 24*60*60*1000,
-          // secure: true,
+          maxAge: 24*60*60*1000,   // milliseocnds
+          //secure: true,     //https
       });
+
         res.redirect('/home')
       }
       else{

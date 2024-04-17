@@ -18,15 +18,25 @@ dbConnect();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser())
-//setting up the engine
+
+
+//setting up the view engine
+
+
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'views'));
+// setting static files directory
 app.use(express.static(path.join(__dirname, "public")));
+
+
 //get routes 
 app.get('/' ,(req,res)=>{res.send("hello World")} )
+
+
 app.get('/login' , (req,res)=>{res.render('login')})
 app.get("/register", (req, res) => {res.render("register")});
 app.get('/home' , authenticated , (req,res)=>{res.render('home')})
+app.get('/dashboard' , authenticated , (req,res)=>{res.render('dashboard')})
 
 //post routes
 app.post("/register", registerController);
@@ -39,5 +49,5 @@ app.listen(port, () => {
 
 
 
- // res.sendFile(path.join(__dirname + "/views/register.html"));
+  //res.sendFile(path.join(__dirname + "/views/register.html"));
 
