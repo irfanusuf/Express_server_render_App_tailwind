@@ -41,7 +41,7 @@ const loginController = async (req, res) => {
           //secure: true,     //https
       });
 
-        res.redirect('/home')
+       res.render('home' , {username : user.username})
       }
       else{
         res.render('login' , {message :  "PassWord Incorrect!"})
