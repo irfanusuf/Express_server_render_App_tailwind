@@ -1,24 +1,19 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RoboMeow | Register</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/register.css" />
   </head>
 
-
-
   <body>
-    <form action="/register" method="POST">
-      <h1>REGISTER</h1>
+    <form action="/register" method="POST" class="
+    container mx-auto my-10 bg-blue flex-col flex "  >
+      <h1 class="text-center">REGISTER</h1>
 
-      {{#if message}}
+      {{#if message}}{{/if}}
 
-      <span>{{message}}</span>
-      
-        {{/if}} 
       <input
         placeholder="Enter Your Name"
         type="text"
@@ -40,7 +35,7 @@
         id="password"
         required
       />
-      <input type="submit" value="REGISTER" />
+      <input type="submit" value="REGISTER" class="w-30 bg-pink" />
     </form>
   </body>
 </html>
