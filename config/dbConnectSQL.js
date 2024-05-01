@@ -7,22 +7,18 @@ const connection = sql.createConnection({
   database: "testnode",
 });
 
-
-const connDb = () => {
+const connDbSQL = () => {
   try {
-    connection.connect((error )=>{
-        if(error){
-            console.log(error)
-            return
-        }
-        console.log("Database connected on localhost MariaDB")
-       
-
+    connection.connect((error, result) => {
+      if (error) {
+        console.log(error);
+        return;
+      }
+      console.log("Database connected on localhost MariaDB");
     });
   } catch (err) {
     console.log(err);
   }
 };
 
-
-module.exports = {connDb , connection}
+module.exports = { connDbSQL, connection };
