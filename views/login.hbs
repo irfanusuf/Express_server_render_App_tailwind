@@ -1,40 +1,47 @@
-<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RoboMeow | Login</title>
-    <link rel="stylesheet" href="/css/styles.css">
+
+    <link rel="stylesheet" href="/css/register.css" />
   </head>
 
-
-
   <body>
-    <form action="/login" method="POST">
-      <h1>LOGIN</h1>
 
-      {{#if message}}
+    <div class="container flex flex-col w-auto mx-auto mt-5  h-96 justify-center ">
 
-      <span>{{message}}</span>
-      
-        {{/if}} 
-    
-      <input
-        placeholder="Enter Your Email"
-        type="email"
-        name="email"
-        id="email"
-        required
-      />
-      <input
-        placeholder="Enter Your Password"
-        type="password"
-        name="password"
-        id="password"
-        required
-      />
-      <input type="submit" value="LOGIN" />
-    </form>
+      <form action="/login" method="POST"  class="container flex flex-col w-auto mx-auto mt-5" >
+
+        <h1 class="text-center font-black text-6xl mb-16">Login to your account</h1>
+
+        {{#if message}}
+
+          <span>{{message}}</span>
+
+        {{/if}}
+
+        <input
+          placeholder="Enter Your Email"
+          type="email"
+          name="email"
+          id="email"
+          required
+          class="mt-5 "
+        />
+        <input
+          placeholder="Enter Your Password"
+          type="password"
+          name="password"
+          id="password"
+          required
+            class="mt-5 "
+        />
+        <input type="submit" value="LOGIN"  class="w-40 bg-green container mx-auto mt-9"/>
+      </form>
+
+    </div>
+
   </body>
 </html>
